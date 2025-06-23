@@ -125,7 +125,7 @@ const handleOpenChat = async (sessionId) => {
               <th>Name</th>
               <th>Phone</th>
               <th>Status</th>
-              <th>Call</th>
+              <th>Chat</th>
             </tr>
           </thead>
           <tbody>
@@ -154,26 +154,29 @@ const handleOpenChat = async (sessionId) => {
       <button onClick={() => setChatVisible(false)}>✖ Close</button>
     </div>
 
-    <div className="chat-box">
-      {chatLoading ? (
-        <p>Loading chat...</p>
-      ) : chatMessages.length === 0 ? (
-        <p>No messages found for this session.</p>
-      ) : (
-        chatMessages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`chat-message ${msg.sender === 'user' ? 'user' : 'bot'}`}
-          >
-            <div className="bubble">
-              <strong>{msg.sender === 'user' ? '🧑 User' : '🤖 Bot'}:</strong>
-              <p>{msg.message}</p>
-              <small>{new Date(msg.timestamp).toLocaleString()}</small>
-            </div>
-          </div>
-        ))
-      )}
-    </div>
+<div className="chat-box">
+  {chatLoading ? (
+    <p>Loading chat...</p>
+  ) : chatMessages.length === 0 ? (
+    <p>No messages found for this session.</p>
+  ) : (
+    chatMessages.map((msg, idx) => (
+      <div
+        key={idx}
+        className={`chat-message ${msg.sender === 'user' ? 'user' : 'bot'}`}
+      >
+        <div className="bubble">
+          <p>{msg.message}</p>
+          <small>{new Date(msg.timestamp).toLocaleTimeString('en-MY', {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: true
+})}</small>
+        </div>
+      </div>
+    ))
+  )}
+</div>
   </div>
 )}
         </table>
